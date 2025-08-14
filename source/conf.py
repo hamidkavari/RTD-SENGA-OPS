@@ -7,8 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'SENGA-OPS'
-copyright = '2025, Hamid Kavari'
-author = 'Hamid Kavari'
+copyright = '2025'
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------
