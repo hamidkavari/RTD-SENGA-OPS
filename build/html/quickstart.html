@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Numerical model (high level)" href="theory.html" />
+    <link rel="next" title="&lt;no title&gt;" href="theory.html" />
     <link rel="prev" title="Installation &amp; build" href="install.html" /> 
 </head>
 
@@ -48,11 +48,24 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation &amp; build</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart (run your first case)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#cpu-mpi">CPU (MPI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gpu-slurm-example">GPU (Slurm example)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tips">Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">Numerical model (high level)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="ops.html">OPS in a nutshell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="senga.html">SENGA‑specific notes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References &amp; further reading</a></li>
@@ -87,11 +100,23 @@
 <p>Assuming you built <code class="docutils literal notranslate"><span class="pre">senga2_mpi</span></code> or a GPU variant, you can run test problems with <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> or a scheduler like Slurm.</p>
 <section id="cpu-mpi">
 <h2>CPU (MPI)<a class="headerlink" href="#cpu-mpi" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>./senga2_mpi<span class="w"> </span>-OPS_DIAGS<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">OPS_FORCE_DECOMP_X</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">OPS_FORCE_DECOMP_Y</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">OPS_FORCE_DECOMP_Z</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>log_mpi.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>./senga2_mpi<span class="w"> </span>-OPS_DIAGS<span class="o">=</span><span class="m">2</span><span class="w">           </span><span class="nv">OPS_FORCE_DECOMP_X</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">OPS_FORCE_DECOMP_Y</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">OPS_FORCE_DECOMP_Z</span><span class="o">=</span><span class="m">1</span><span class="w">           </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>log_mpi.txt
 </pre></div>
 </div>
+</section>
+<section id="gpu-slurm-example">
+<h2>GPU (Slurm example)<a class="headerlink" href="#gpu-slurm-example" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>-A<span class="w"> </span>&lt;account&gt;<span class="w"> </span>--nodes<span class="o">=</span><span class="m">1</span><span class="w"> </span>--time<span class="o">=</span><span class="m">01</span>:00:00<span class="w">              </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">8</span><span class="w">              </span>./senga2_mpi_cuda<span class="w"> </span>-OPS_DIAGS<span class="o">=</span><span class="m">2</span><span class="w">              </span><span class="nv">OPS_FORCE_DECOMP_X</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">OPS_FORCE_DECOMP_Y</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">OPS_FORCE_DECOMP_Z</span><span class="o">=</span><span class="m">1</span><span class="w">              </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>log_gpu.txt
+</pre></div>
+</div>
+<section id="tips">
+<h3>Tips<a class="headerlink" href="#tips" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Start with small grids to test correctness; scale up gradually.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">OPS_DIAGS</span></code> to confirm halo depths and partitioning.</p></li>
+<li><p>Compare integrated quantities (e.g. total mass) between backends.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -100,13 +125,13 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="install.html" class="btn btn-neutral float-left" title="Installation &amp; build" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="theory.html" class="btn btn-neutral float-right" title="Numerical model (high level)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="theory.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Hamid Kavari.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

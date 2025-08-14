@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="SENGA‑specific notes" href="senga.html" />
-    <link rel="prev" title="Numerical model (high level)" href="theory.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="theory.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,10 +43,13 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Start here</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation &amp; build</a></li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">Numerical model (high level)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart (run your first case)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OPS in a nutshell</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#core-abstractions">Core abstractions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mini-example-illustrative">Mini example (illustrative)</a></li>
@@ -55,6 +58,13 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="senga.html">SENGA‑specific notes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References &amp; further reading</a></li>
@@ -111,13 +121,17 @@
 </section>
 <section id="backends-and-targets">
 <h2>Backends and targets<a class="headerlink" href="#backends-and-targets" title="Link to this heading"></a></h2>
-<p>CPU: MPI (distributed), OpenMP (shared), vectorised.</p>
-<p>GPU: CUDA (NVIDIA), HIP (AMD). Fallback “F2C” backends exist when CUDA Fortran isn’t available.</p>
+<ul class="simple">
+<li><p><strong>CPU:</strong> MPI (distributed), OpenMP (shared), vectorised.</p></li>
+<li><p><strong>GPU:</strong> CUDA (NVIDIA), HIP (AMD). Fallback “F2C” backends exist when CUDA Fortran isn’t available.</p></li>
+</ul>
 </section>
 <section id="practical-notes">
 <h2>Practical notes<a class="headerlink" href="#practical-notes" title="Link to this heading"></a></h2>
-<p>Always build OPS first for your target backend and ensure OPS_INSTALL_PATH is exported or referenced by the SENGA build system.</p>
-<p>Use OPS_DIAGS and OPS_FORCE_DECOMP_{X,Y,Z} at runtime to control diagnostics and decomposition.</p>
+<ul class="simple">
+<li><p>Always build <strong>OPS first</strong> for your target backend and ensure <code class="docutils literal notranslate"><span class="pre">OPS_INSTALL_PATH</span></code> is exported or referenced by the SENGA build system.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">OPS_DIAGS</span></code> and <code class="docutils literal notranslate"><span class="pre">OPS_FORCE_DECOMP_{X,Y,Z}</span></code> at runtime to control diagnostics and decomposition.</p></li>
+</ul>
 </section>
 </section>
 
@@ -125,14 +139,14 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="theory.html" class="btn btn-neutral float-left" title="Numerical model (high level)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="theory.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="senga.html" class="btn btn-neutral float-right" title="SENGA‑specific notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Hamid Kavari.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

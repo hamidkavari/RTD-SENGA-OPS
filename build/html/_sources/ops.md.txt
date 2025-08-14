@@ -21,14 +21,13 @@ ops_par_loop(update_rho, b, range,
   ops_arg_dat(rho, S10, OPS_READ),
   ops_arg_dat(rho, S10, OPS_WRITE));
 ```
+
 ## Backends and targets
 
-CPU: MPI (distributed), OpenMP (shared), vectorised.
-
-GPU: CUDA (NVIDIA), HIP (AMD). Fallback "F2C" backends exist when CUDA Fortran isn’t available.
+- **CPU:** MPI (distributed), OpenMP (shared), vectorised.
+- **GPU:** CUDA (NVIDIA), HIP (AMD). Fallback "F2C" backends exist when CUDA Fortran isn’t available.
 
 ## Practical notes
 
-Always build OPS first for your target backend and ensure OPS_INSTALL_PATH is exported or referenced by the SENGA build system.
-
-Use OPS_DIAGS and OPS_FORCE_DECOMP_{X,Y,Z} at runtime to control diagnostics and decomposition.
+- Always build **OPS first** for your target backend and ensure `OPS_INSTALL_PATH` is exported or referenced by the SENGA build system.
+- Use `OPS_DIAGS` and `OPS_FORCE_DECOMP_{X,Y,Z}` at runtime to control diagnostics and decomposition.

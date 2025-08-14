@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Numerical model (high level) &mdash; SENGA-OPS 1.0 documentation</title>
+  <title>Theory — numerical model overview &mdash; SENGA-OPS 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="OPS in a nutshell" href="ops.html" />
-    <link rel="prev" title="Installation &amp; build" href="install.html" /> 
+    <link rel="prev" title="Quickstart (run your first case)" href="quickstart.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,10 +43,14 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Start here</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation &amp; build</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Numerical model (high level)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart (run your first case)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Theory — numerical model overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#unknowns-and-equations">Unknowns and equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#discretisation-typical">Discretisation (typical)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stability-accuracy-tips">Stability &amp; accuracy tips</a></li>
@@ -54,6 +58,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ops.html">OPS in a nutshell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="senga.html">SENGA‑specific notes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References &amp; further reading</a></li>
@@ -73,7 +84,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Numerical model (high level)</li>
+      <li class="breadcrumb-item active">Theory — numerical model overview</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/theory.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,35 +94,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="numerical-model-high-level">
-<h1>Numerical model (high level)<a class="headerlink" href="#numerical-model-high-level" title="Link to this heading"></a></h1>
-<p>SENGA+ targets <strong>compressible reacting flows</strong>. At a high level the governing equations are the compressible Navier–Stokes system coupled to species transport and energy with <strong>finite‑rate chemistry</strong>. Time integration is explicit multi‑stage Runge–Kutta, and spatial derivatives use high‑order centered stencils with optional filtering.</p>
+  <section id="theory-numerical-model-overview">
+<h1>Theory — numerical model overview<a class="headerlink" href="#theory-numerical-model-overview" title="Link to this heading"></a></h1>
+<p>SENGA+ targets <strong>compressible reacting flows</strong>. At a high level the governing equations are the compressible Navier–Stokes system coupled to species transport and energy with <strong>finite-rate chemistry</strong>. Time integration is explicit multi-stage Runge–Kutta, and spatial derivatives use high-order centered stencils with optional filtering.</p>
 <blockquote>
-<div><p><strong>Note</strong>
+<div><p><strong>Note</strong><br />
 This page provides the <em>modeling context</em> to help users understand setups and stability constraints. Implementation details live in the SENGA sources.</p>
 </div></blockquote>
 <section id="unknowns-and-equations">
 <h2>Unknowns and equations<a class="headerlink" href="#unknowns-and-equations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Conservative form variables (per cell): $\rho, , \rho\mathbf{u}, , \rho E$.</p></li>
-<li><p>Species mass fractions $Y_s$ (one per species), temperature $T$.</p></li>
-<li><p>Source terms from reaction rates $\dot{\omega}_s(T, {Y})$.</p></li>
+<li><p>Conservative variables (per cell): $\rho, \rho\mathbf{u}, \rho E$</p></li>
+<li><p>Species mass fractions $Y_s$, temperature $T$</p></li>
+<li><p>Source terms from reaction rates $\dot{\omega}_s(T,{Y})$</p></li>
 </ul>
 </section>
 <section id="discretisation-typical">
 <h2>Discretisation (typical)<a class="headerlink" href="#discretisation-typical" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Space:</strong> high‑order centered differences (e.g. 10‑point/10th‑order for smooth problems) with optional dissipation/filtering near discontinuities.</p></li>
-<li><p><strong>Time:</strong> low‑storage explicit <strong>RK3</strong> (or similar) with CFL chosen from max acoustic speed.</p></li>
-<li><p><strong>Parallelisation:</strong> domain decomposition with halo exchanges each stage.</p></li>
+<li><p><strong>Space:</strong> high-order centered differences (e.g. 10-point/10th-order) with optional filtering</p></li>
+<li><p><strong>Time:</strong> low-storage explicit <strong>RK3</strong> (or similar), CFL from max acoustic speed</p></li>
+<li><p><strong>Parallelisation:</strong> domain decomposition + halo exchanges each stage</p></li>
 </ul>
 </section>
 <section id="stability-accuracy-tips">
 <h2>Stability &amp; accuracy tips<a class="headerlink" href="#stability-accuracy-tips" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Start with a CFL of <code class="docutils literal notranslate"><span class="pre">0.2–0.4</span></code> for reacting cases; increase cautiously.</p></li>
-<li><p>For strong shocks, enable numerical filtering or reduce order locally.</p></li>
-<li><p>Use OPS diagnostics to verify halo depths and decomposition quality.</p></li>
+<li><p>Start with CFL <code class="docutils literal notranslate"><span class="pre">0.2–0.4</span></code> for reacting cases; increase cautiously</p></li>
+<li><p>For strong shocks, enable filtering or reduce order locally</p></li>
+<li><p>Use OPS diagnostics to verify halo depths and decomposition quality</p></li>
 </ul>
 </section>
 </section>
@@ -120,14 +131,14 @@ This page provides the <em>modeling context</em> to help users understand setups
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="install.html" class="btn btn-neutral float-left" title="Installation &amp; build" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart (run your first case)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="ops.html" class="btn btn-neutral float-right" title="OPS in a nutshell" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Hamid Kavari.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

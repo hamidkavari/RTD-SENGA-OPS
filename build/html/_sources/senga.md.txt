@@ -1,6 +1,14 @@
 # SENGA‑specific notes
 
 This project integrates **SENGA+** kernels with **OPS** backends. The repository layout is roughly:
+
+```
+SENGA-OPS/
+├─ SENGA/        # SENGA+ sources and build logic
+├─ OPS/          # OPS sources (as a submodule/vendor)
+└─ README.md
+```
+
 ### Build order
 
 1. Build **OPS** for your target (CPU/GPU) – produces libs/headers.

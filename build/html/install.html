@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Numerical model (high level)" href="theory.html" />
+    <link rel="next" title="Quickstart (run your first case)" href="quickstart.html" />
     <link rel="prev" title="Introduction" href="intro.html" /> 
 </head>
 
@@ -48,11 +48,23 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation &amp; build</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#get-the-sources">1) Get the sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-ops-for-your-target">2) Build OPS for your target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-senga">3) Build SENGA</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">Numerical model (high level)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart (run your first case)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="ops.html">OPS in a nutshell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="senga.html">SENGA‑specific notes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References &amp; further reading</a></li>
@@ -100,6 +112,34 @@
 </pre></div>
 </div>
 </section>
+<section id="build-ops-for-your-target">
+<h2>2) Build OPS for your target<a class="headerlink" href="#build-ops-for-your-target" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example (sketch): build Fortran OPS libraries for your backend</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;source the appropriate setup file (compiler/paths/backends)&quot;</span>
+<span class="nb">source</span><span class="w"> </span>OPS/source_files/&lt;your_setup&gt;.sh
+
+<span class="c1"># If using the Python translator tools, activate the venv</span>
+<span class="nb">cd</span><span class="w"> </span>OPS/ops_translator<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>setup_venv.sh<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>-
+
+<span class="c1"># Build Fortran side of OPS</span>
+<span class="nb">cd</span><span class="w"> </span>OPS/ops/fortran
+make<span class="w"> </span>&lt;target&gt;<span class="w">   </span><span class="c1"># e.g. mpi, mpi_cuda, f2c_mpi_cuda, f2c_mpi_hip</span>
+</pre></div>
+</div>
+<p>Once built, you should see libraries under <code class="docutils literal notranslate"><span class="pre">OPS/ops/fortran/lib/</span></code>.</p>
+</section>
+<section id="build-senga">
+<h2>3) Build SENGA<a class="headerlink" href="#build-senga" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>SENGA-OPS/SENGA
+<span class="c1"># If the Makefile needs it, export the install path</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPS_INSTALL_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/../OPS/ops/fortran
+make<span class="w"> </span>-f<span class="w"> </span>Makefile.codegen<span class="w"> </span>senga2_&lt;target&gt;
+</pre></div>
+</div>
+<blockquote>
+<div><p>If a build fails, re‑run with <code class="docutils literal notranslate"><span class="pre">VERBOSE=1</span></code> and verify compilers, HDF5, and <code class="docutils literal notranslate"><span class="pre">OPS_INSTALL_PATH</span></code>.</p>
+</div></blockquote>
+</section>
 </section>
 
 
@@ -107,13 +147,13 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="theory.html" class="btn btn-neutral float-right" title="Numerical model (high level)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="quickstart.html" class="btn btn-neutral float-right" title="Quickstart (run your first case)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Hamid Kavari.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
