@@ -13,11 +13,17 @@ quickstart
 
 ```{toctree}
 :maxdepth: 2
-:caption: Concepts
+:caption: SENGA
 
-theory
-ops
 senga
+senga/theory
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: OPS
+
+ops
 ```
 
 ```{toctree}
