@@ -1,6 +1,6 @@
 # SENGA‑OPS Documentation
 
-*SENGA‑OPS* brings the high‑order **SENGA+** reactive‑flow solver together with **OPS** (Oxford Parallel library for Structured mesh solvers), enabling portable performance across **CPU** and **GPU** backends.
+*SENGA‑OPS* brings the high‑order **SENGA+** reactive‑flow solver together with **OPS** (Oxford Parallel library for Structured mesh solvers), enabling portable performance using Domain Specific Language (DSL) across **CPU** and **GPU** backends.
 
 ```{toctree}
 :maxdepth: 2
