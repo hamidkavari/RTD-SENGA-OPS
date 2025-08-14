@@ -1,0 +1,13 @@
+# FAQ
+
+**Build fails with undefined `ops_*` symbols**  
+Make sure you built OPS first for the same backend and that `OPS_INSTALL_PATH` is visible to the SENGA build.
+
+**CUDA Fortran isn’t available on my cluster**  
+Use the `f2c_*` backends (e.g. `f2c_mpi_cuda`) which wrap the GPU parts via C.
+
+**HDF5 not found**  
+Install the development package (e.g. `libhdf5-dev`, `module load hdf5`) and rebuild both OPS and SENGA.
+
+**How do I choose a decomposition?**  
+Start with a near‑cube factorisation close to your rank count (e.g. 128 → 8×4×4) and refine based on OPS diagnostics.

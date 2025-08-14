@@ -1,0 +1,15 @@
+# Installation & build
+
+## Prerequisites
+
+- **GNU Make** and a recent C/C++ & Fortran toolchain
+- **MPI** (`mpicc`, `mpif90`)
+- **HDF5** development libraries
+- **CUDA** (for NVIDIA GPUs) or **ROCm/HIP** (for AMD GPUs)
+
+## 1) Get the sources
+
+```bash
+git clone --recurse-submodules https://github.com/senga-ops/SENGA-OPS.git
+cd SENGA-OPS
+```

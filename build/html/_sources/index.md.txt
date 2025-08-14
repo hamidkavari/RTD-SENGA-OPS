@@ -9,22 +9,29 @@
 intro
 install
 quickstart
+```
 
+```{toctree}
 :maxdepth: 2
 :caption: Concepts
 
 theory
 ops
 senga
+```
 
+```{toctree}
 :maxdepth: 1
 :caption: Tutorials
 
 tutorials/index
+```
 
+```{toctree}
 :maxdepth: 1
 :caption: Project
 
 faq
 contributing
 references
+```

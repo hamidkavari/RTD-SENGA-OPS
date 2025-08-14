@@ -3,24 +3,24 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search &mdash; SENGA-OPS 1.0 documentation</title>
+  <title>Introduction &mdash; SENGA-OPS 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-    
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation &amp; build" href="install.html" />
+    <link rel="prev" title="SENGA‑OPS Documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -35,7 +35,7 @@
             SENGA-OPS
           </a>
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -43,23 +43,12 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Start here</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation &amp; build</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart (run your first case)</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Numerical model (high level)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ops.html">OPS in a nutshell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="senga.html">SENGA‑specific notes</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Project</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References &amp; further reading</a></li>
@@ -79,8 +68,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Search</li>
+      <li class="breadcrumb-item active">Introduction</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/intro.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,22 +78,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
-  </noscript>
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p><strong>SENGA‑OPS</strong> combines the SENGA+ solver family with the <strong>OPS</strong> DSL. The goal is to express physics kernels once and run them efficiently on multiple targets (MPI, OpenMP, CUDA, HIP) through code generation/transformation.</p>
+<p><strong>Why OPS?</strong></p>
+<ul class="simple">
+<li><p><em>Single source, many backends:</em> The same high‑level loops generate code for CPU (MPI/OpenMP/SIMD) and GPU (CUDA/HIP) targets.</p></li>
+<li><p><em>Halo/partition management:</em> OPS manages multi‑block halos and decomposition so you focus on algorithms not plumbing.</p></li>
+<li><p><em>Diagnostics &amp; tuning:</em> Built‑in diagnostics, decomposition hints, and profiling help you get scalable performance.</p></li>
+</ul>
+<p><strong>What this documentation covers</strong></p>
+<ul class="simple">
+<li><p>An overview of the <strong>numerical model</strong> used by SENGA+ (<code class="docutils literal notranslate"><span class="pre">theory.md</span></code>).</p></li>
+<li><p>How <strong>OPS</strong> abstractions map to SENGA kernels (<code class="docutils literal notranslate"><span class="pre">ops.md</span></code>).</p></li>
+<li><p>SENGA‑specific build and run notes (<code class="docutils literal notranslate"><span class="pre">senga.md</span></code>, <code class="docutils literal notranslate"><span class="pre">install.md</span></code>).</p></li>
+<li><p>Step‑by‑step <strong>tutorials</strong> for CPU/GPU builds, domain decomposition and post‑processing (<code class="docutils literal notranslate"><span class="pre">tutorials/</span></code>).</p></li>
+</ul>
+</section>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="SENGA‑OPS Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation &amp; build" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
@@ -125,14 +124,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script>
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>
